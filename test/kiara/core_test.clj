@@ -7,7 +7,7 @@
 
 (use-fixtures :once schema.test/validate-schemas)
 
-(deftest init-test
+#_(deftest init-test
   (testing "Initialize the system. No testing, just avoid exceptions"
     (let [k1 (create)
           k2 (create "datomic:free://localhost:4334/")]
