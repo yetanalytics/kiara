@@ -1,7 +1,7 @@
 (ns kiara.types
   "Schema type data"
   (:require [schema.core :as s])
-  (:import [datomic.peer Connection]
+  (:import [datomic Connection]
            [java.net URI URL]
            [java.util Date]))
 

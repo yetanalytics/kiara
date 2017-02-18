@@ -13,7 +13,7 @@
             [schema.core :as s])
   (:import [datomic Peer]
            [datomic.db Db]
-           [datomic.peer Connection]
+           [datomic Connection]
            [java.net URI]))
 
 (def kiara-ns "http://raw.github.com/quoll/kiara/master/ns#")
