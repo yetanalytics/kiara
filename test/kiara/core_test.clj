@@ -20,9 +20,12 @@
 "@prefix : <http://example.org#> .
 :a :b 1.0 .")
 
+(defn create-mem []
+  (create "datomic:mem://hello"))
+
 (deftest load-default
   (testing "Load a simple graph"
-    (let [k (create)
+    (let [k (create-mem)
           k (load-schema k (ku/stream simple-data))
           k (load-ttl k (ku/stream simple-data))
           t (get-triples k)]
@@ -31,7 +34,7 @@
 
 (deftest load-graph
   (testing "Load a named graph"
-    (let [k (create)
+    (let [k (create-mem)
           k (load-schema k (ku/stream simple-data) "my:graph")
           k (load-ttl k (ku/stream simple-data) "my:graph")
           t (get-triples k "my:graph")]
@@ -40,7 +43,7 @@
 
 (deftest multi-load
   (testing "Load a named graph more than once"
-    (let [k (create)
+    (let [k (create-mem)
           tf (fn [] (let [k (load-schema k (ku/stream simple-data) "my:graph")
                          k (load-ttl k (ku/stream simple-data) "my:graph")
                          t (get-triples k "my:graph")]
@@ -51,7 +54,7 @@
 
 (deftest write-ttl-default
   (testing "Simple TTL output from default"
-    (let [k (create)
+    (let [k (create-mem)
           k (load-schema k (ku/stream simple-data))
           k (load-ttl k (ku/stream simple-data))
           [prefixes triples :as s] (w/write-ttl k)]
@@ -61,7 +64,7 @@
 
 (deftest write-ttl
   (testing "Simple TTL output"
-    (let [k (create)
+    (let [k (create-mem)
           k (load-schema k (ku/stream simple-data) "my:graph")
           k (load-ttl k (ku/stream simple-data) "my:graph")
           [prefixes triples :as s] (w/write-ttl k "my:graph")]
